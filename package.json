@@ -1,24 +1,22 @@
 {
   "name": "vite-react-electron",
-  "productName": "Electron",
   "private": true,
   "version": "1.0.0",
-  "description": "Vite React Electron boilerplate.",
-  "author": "草鞋没号 <308487730@qq.com>",
-  "license": "MIT",
+  "description": "Compilador",
+  "author": "João Arthur",
+  "license": "UNLICENSE",
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "node scripts/watch.mjs",
     "build": "npm run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
-    "typecheck": "tsc --noEmit --project packages/renderer/tsconfig.json",
-    "debug": "cross-env-shell NODE_ENV=debug \"npm run typecheck && node scripts/build.mjs && vite ./packages/renderer\""
+    "typecheck": "tsc --noEmit --project packages/renderer/tsconfig.json"
   },
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "dependencies": {
-    "electron-store": "^8.0.1",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@types/react": "^17.0.39",
@@ -27,8 +25,6 @@
     "cross-env": "^7.0.3",
     "electron": "^17.0.0",
     "electron-builder": "^22.14.13",
-    "execa": "^6.1.0",
-    "node-fetch": "^3.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "sass": "^1.49.7",
