@@ -5,18 +5,18 @@ import { useLoading } from './loading';
 
 const { appendLoading, removeLoading } = useLoading();
 
-(async () => {
+async function init() {
     await domReady();
-
     appendLoading();
-})();
+}
+
+init();
 
 // --------- Expose some API to the Renderer process. ---------
 contextBridge.exposeInMainWorld('fs', fs);
 contextBridge.exposeInMainWorld('removeLoading', removeLoading);
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer));
 
-// `exposeInMainWorld` can't detect attributes and methods of `prototype`, manually patching it.
 function withPrototype(obj: Record<string, any>) {
     const protos = Object.getPrototypeOf(obj);
 
