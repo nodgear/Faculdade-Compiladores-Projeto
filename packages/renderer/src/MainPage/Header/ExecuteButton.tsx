@@ -1,12 +1,11 @@
 import { BaseButton } from '@/BaseButton';
-import { BiPlayCircle } from 'react-icons/bi';
+import { FcVideoFile } from 'react-icons/fc';
 
 export function ExecuteButton() {
     return (
         <BaseButton
             onClick={() => console.log('execute button')}
-            label='execute'
-            Icon={<BiPlayCircle size={30} />}
+            Icon={<FcVideoFile size={20} />}
         />
     );
 }

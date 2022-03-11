@@ -5,8 +5,7 @@ export function SaveFileButton() {
     return (
         <BaseButton
             onClick={() => console.log('save file button')}
-            label='save'
-            Icon={<BiSave size={30} />}
+            Icon={<BiSave size={20} />}
         />
     );
 }

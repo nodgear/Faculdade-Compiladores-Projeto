@@ -1,12 +1,11 @@
 import { BaseButton } from '@/BaseButton';
-import { BiFolderOpen } from 'react-icons/bi';
+import { FcOpenedFolder } from 'react-icons/fc';
 
 export function OpenFileButton() {
     return (
         <BaseButton
             onClick={() => console.log('open file button')}
-            label='open'
-            Icon={<BiFolderOpen size={30} />}
+            Icon={<FcOpenedFolder size={20} />}
         />
     );
 }
