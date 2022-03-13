@@ -58,7 +58,6 @@ function watchPreload(server) {
     });
 }
 
-// bootstrap
 const server = await createServer({
     configFile: 'packages/renderer/vite.config.ts'
 });

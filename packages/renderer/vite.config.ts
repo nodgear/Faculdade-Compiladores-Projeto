@@ -5,25 +5,10 @@ import react from '@vitejs/plugin-react';
 import resolve from 'vite-plugin-resolve';
 import pkg from '../../package.json';
 
-/**
- * @see https://vitejs.dev/config/
- */
 export default defineConfig({
     mode: process.env.NODE_ENV,
     root: __dirname,
-    plugins: [
-        react(),
-        resolveElectron()
-        /**
-         * Here you can specify other modules
-         * 🚧 You have to make sure that your module is in `dependencies` and not in the` devDependencies`,
-         *    which will ensure that the electron-builder can package it correctly
-         * @example
-         * {
-         *   'electron-store': 'const Store = require("electron-store"); export default Store;',
-         * }
-         */
-    ],
+    plugins: [react(), resolveElectron()],
     base: './',
     build: {
         sourcemap: process.env.NODE_ENV === 'debug',
@@ -107,7 +92,6 @@ ${exportDefault}
 
 ${exportMembers}
 `;
-
                 return { [moduleId]: nodeModuleCode };
             })
             .reduce((memo, item) => Object.assign(memo, item), {});

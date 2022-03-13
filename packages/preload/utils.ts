@@ -1,16 +1,14 @@
-/** Document ready */
-export const domReady = (
-    condition: DocumentReadyState[] = ['complete', 'interactive']
-) => {
-    return new Promise(resolve => {
-        if (condition.includes(document.readyState)) {
-            resolve(true);
-        } else {
-            document.addEventListener('readystatechange', () => {
-                if (condition.includes(document.readyState)) {
-                    resolve(true);
-                }
-            });
-        }
+const domReadyStates: DocumentReadyState[] = ['complete', 'interactive'];
+
+export function waitDomReady() {
+    return new Promise<void>(resolve => {
+        if (isDomStateReady()) return resolve();
+        document.addEventListener('readystatechange', () => {
+            if (isDomStateReady()) return resolve();
+        });
     });
-};
+}
+
+function isDomStateReady() {
+    return domReadyStates.includes(document.readyState);
+}

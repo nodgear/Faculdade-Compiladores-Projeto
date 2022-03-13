@@ -1,30 +1,26 @@
 import fs from 'fs';
 import { contextBridge, ipcRenderer } from 'electron';
-import { domReady } from './utils';
+import { waitDomReady } from './utils';
 import { useLoading } from './loading';
 
 const { appendLoading, removeLoading } = useLoading();
 
 async function init() {
-    await domReady();
+    await waitDomReady();
     appendLoading();
 }
 
 init();
 
-// --------- Expose some API to the Renderer process. ---------
 contextBridge.exposeInMainWorld('fs', fs);
 contextBridge.exposeInMainWorld('removeLoading', removeLoading);
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer));
 
 function withPrototype(obj: Record<string, any>) {
     const protos = Object.getPrototypeOf(obj);
-
     for (const [key, value] of Object.entries(protos)) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) continue;
-
         if (typeof value === 'function') {
-            // Some native APIs, like `NodeJS.EventEmitter['on']`, don't work in the Renderer process. Wrapping them into a function.
             obj[key] = function (...args: any) {
                 return value.call(obj, ...args);
             };

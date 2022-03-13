@@ -1,11 +1,9 @@
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, shell, dialog, ipcMain } from 'electron';
+import fs from 'fs/promises';
 import { release } from 'os';
 import { join } from 'path';
 
-// Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration();
-
-// Set application name for Windows 10+ notifications
 if (process.platform === 'win32') app.setAppUserModelId(app.getName());
 
 if (!app.requestSingleInstanceLock()) {
@@ -14,6 +12,17 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 let win: BrowserWindow | null = null;
+
+ipcMain.handle('my-invokable-ipc', async (event, ...args) => {
+    if (!win) return null;
+    const chosenFile = await dialog.showOpenDialog(win, {
+        filters: [{ name: 'Custom File Type', extensions: ['dfj'] }]
+    });
+    if (chosenFile.canceled) return null;
+    const [path] = chosenFile.filePaths;
+    const fileContent = await fs.readFile(path, { encoding: 'utf-8' });
+    return fileContent;
+});
 
 async function createWindow() {
     win = new BrowserWindow({
@@ -26,22 +35,11 @@ async function createWindow() {
     if (app.isPackaged || process.env['DEBUG']) {
         win.loadFile(join(__dirname, '../renderer/index.html'));
     } else {
-        // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
         const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`;
-
         win.loadURL(url);
         win.webContents.openDevTools();
     }
 
-    // Test active push message to Renderer-process
-    win.webContents.on('did-finish-load', () => {
-        win?.webContents.send(
-            'main-process-message',
-            new Date().toLocaleString()
-        );
-    });
-
-    // Make all links open with the browser, not with the application
     win.webContents.setWindowOpenHandler(({ url }) => {
         if (url.startsWith('https:')) shell.openExternal(url);
         return { action: 'deny' };
@@ -57,7 +55,6 @@ app.on('window-all-closed', () => {
 
 app.on('second-instance', () => {
     if (win) {
-        // Focus on the main window if the user tried to open another
         if (win.isMinimized()) win.restore();
         win.focus();
     }

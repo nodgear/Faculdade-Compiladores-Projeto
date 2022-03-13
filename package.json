@@ -8,7 +8,7 @@
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "node scripts/watch.mjs",
-    "build": "npm run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
+    "build": "pnpm run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
     "typecheck": "tsc --noEmit --project packages/renderer/tsconfig.json"
   },
   "engines": {
@@ -18,7 +18,8 @@
     "ace-builds": "^1.4.14",
     "react-ace": "^9.5.0",
     "react-icons": "^4.3.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "zustand": "^3.7.1"
   },
   "devDependencies": {
     "@types/react": "^17.0.39",
