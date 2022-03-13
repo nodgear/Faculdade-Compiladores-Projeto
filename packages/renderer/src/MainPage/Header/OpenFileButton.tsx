@@ -11,5 +11,5 @@ export function OpenFileButton() {
         setEditorCode(content);
     }
 
-    return <BaseButton onClick={onClick} Icon={<FcOpenedFolder size={20} />} />;
+    return <BaseButton title="Abrir (CTRL+O)" onClick={onClick} Icon={<FcOpenedFolder size={20} />} />;
 }
