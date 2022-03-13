@@ -1,7 +1,7 @@
 import { BaseButton } from '@/BaseButton';
 import { FcDocument } from 'react-icons/fc';
 
-export function FileButton() {
+export function NewFileButton() {
     return (
         <BaseButton
             onClick={() => console.log('file button')}
