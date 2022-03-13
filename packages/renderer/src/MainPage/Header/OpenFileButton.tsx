@@ -1,4 +1,4 @@
-import { BiFolderOpen } from 'react-icons/bi';
+import { FcOpenedFolder } from 'react-icons/fc';
 import { readUserFile } from '../../../../lib/readUserFile';
 import { BaseButton } from '@/BaseButton';
 import { useEditorStore } from '../Body/Editor/useEditorStore';
@@ -11,11 +11,5 @@ export function OpenFileButton() {
         setEditorCode(content);
     }
 
-    return (
-        <BaseButton
-            onClick={onClick}
-            label='open'
-            Icon={<BiFolderOpen size={30} />}
-        />
-    );
+    return <BaseButton onClick={onClick} Icon={<FcOpenedFolder size={20} />} />;
 }

@@ -1,12 +1,11 @@
 import { BaseButton } from '@/BaseButton';
-import { MdClear } from 'react-icons/md';
+import { FcCancel } from 'react-icons/fc';
 
 export function ClearButton() {
     return (
         <BaseButton
             onClick={() => console.log('clear button')}
-            label='clear'
-            Icon={<MdClear size={30} />}
+            Icon={<FcCancel size={20} />}
         />
     );
 }

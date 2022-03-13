@@ -1,12 +1,11 @@
 import { BaseButton } from '@/BaseButton';
-import { BiFile } from 'react-icons/bi';
+import { FcDocument } from 'react-icons/fc';
 
 export function FileButton() {
     return (
         <BaseButton
             onClick={() => console.log('file button')}
-            label='file'
-            Icon={<BiFile size={30} />}
+            Icon={<FcDocument size={20} />}
         />
     );
 }
