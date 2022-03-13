@@ -1,11 +1,11 @@
 import { BaseButton } from '@/BaseButton';
-import { BiSave } from 'react-icons/bi';
+import { useEditorStore } from '../Body/Editor/useEditorStore';
+import save from '@/assets/save.svg';
 
 export function SaveFileButton() {
-    return (
-        <BaseButton
-            onClick={() => console.log('save file button')}
-            Icon={<BiSave size={20} />}
-        />
-    );
+    const { setEditorCode } = useEditorStore();
+
+    async function onClick() {}
+
+    return <BaseButton onClick={onClick} Icon={<img src={save} />} />;
 }
